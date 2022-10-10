@@ -17,7 +17,7 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
-
+                @guest
                 <!-- Login Links -->
                 <div class="hidden sm:-my-px sm:ml-4 sm:flex ">
                     <x-jet-nav-link href="/login">
@@ -25,6 +25,7 @@
                         {{ __('Login') }}
                     </x-jet-nav-link>
                 </div>
+                @endguest
             </div>
 
             @auth   
@@ -80,8 +81,7 @@
                 @endif
                 
                 <!-- Settings Dropdown -->
-                <div class="ml-3 relative">
-                
+                <div class="ml-3 relative">               
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -102,11 +102,11 @@
                         </x-slot>
 
                         <x-slot name="content">
+                            <!-- Admin Software -->
+                            <x-jet-dropdown-link href="{{ route('admin') }}">
+                                Administración
+                            </x-jet-dropdown-link>
                             <!-- Account Management -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
-                            </div>
-
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
@@ -129,8 +129,7 @@
                                 </x-jet-dropdown-link>
                             </form>
                         </x-slot>
-                    </x-jet-dropdown>
-                
+                    </x-jet-dropdown>              
                 </div>
             </div>
              @endauth
